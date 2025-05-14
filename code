@@ -1,0 +1,28 @@
+# Step 1: Unzip the uploaded Titanic dataset
+import zipfile
+import os
+
+zip_path = "/content/titanic.zip"
+extract_path = "/content/titanic"
+
+# Create directory if it doesn't exist
+os.makedirs(extract_path, exist_ok=True)
+
+# Extract zip
+with zipfile.ZipFile(zip_path, 'r') as zip_ref:
+    zip_ref.extractall(extract_path)
+
+# Step 2: Load the dataset
+import pandas as pd
+
+# Check if train.csv is in the extracted folder
+train_csv_path = os.path.join(extract_path, "train.csv")
+df = pd.read_csv(train_csv_path)
+
+# Step 3: View data overview
+print("Data Overview:")
+print(df.head())
+print("\nSummary Statistics:")
+print(df.describe())
+print("\nMissing Values:")
+print(df.isnull().sum())
